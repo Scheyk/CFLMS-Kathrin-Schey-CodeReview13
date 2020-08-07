@@ -1,0 +1,12 @@
+.card {
+	width: 20em;
+}
+
+.create {
+	width: 50em;
+	margin: auto;
+}
+
+textarea {
+  resize: none;
+}
