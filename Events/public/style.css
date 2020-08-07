@@ -10,3 +10,9 @@
 textarea {
   resize: none;
 }
+
+.jumbotron {
+	height: 30em;
+	background-image: url('../img/hero.png');
+	background-size: cover;
+}

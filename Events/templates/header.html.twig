@@ -15,10 +15,13 @@
 
 <!-- the jumbotron -->
 <div class="jumbotron">
-  <h1>Global event management company</h1>      
-  <p>Come in and partyOn!.</p>
+  <h1 class="m-5">Global event management company</h1>      
+  <p class="h3">Come in and partyOn!</p>
 </div>
-<div class="container">
-  <p>This is some text.</p>      
-  <p>This is another text.</p>      
+<div class="container mb-3"> 
+    {% for message in app.flashes('notice') %}           
+      <div class="alert alert-success">               
+        {{ message }}           
+      </div> 
+    {% endfor %}       
 </div>
