@@ -135,7 +135,7 @@ class EventsController extends AbstractController
         			$phone = $form['phone']->getData();
         			$address = $form['address']->getData();
         			$url = $form['url']->getData();    			
-        			$type= $form['type']->getData();
+        			$type = $form['type']->getData();
               $day = $form['day']->getData();
               $start = $form['start']->getData();              
 
@@ -190,4 +190,20 @@ class EventsController extends AbstractController
 
         return $this->redirectToRoute('home');
    }
+
+   /**
+    * @Route("/search/{type}", name="suche")
+    */
+   public function searchAction($type='')
+    {            
+    
+      $nadel= $type; //implement your search here, 
+      
+      $heuhaufen= $this->getDoctrine()->getRepository('App:Events');
+      $events=$heuhaufen->findBy(array("type"=>$nadel)); //Here you can return your data in JSON format or in a twig template 
+                
+      return $this->render('events/suchen.html.twig', array('events'=>$events));  
+
+    }
+   
 }

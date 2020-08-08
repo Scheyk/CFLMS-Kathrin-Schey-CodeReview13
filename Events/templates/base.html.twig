@@ -17,13 +17,10 @@
     <body>
       {% include 'header.html.twig' %}    	
       
-      <div class="container-fluid">
-        <div class="col-lg-3">
-          {% include 'sidebar.html.twig' %}
-        </div>
-        <div class="col-lg-9">
+      <div class="container-fluid">        
+        
           {% block body %}{% endblock %}
-        </div>        
+               
       </div>
         
       {% block javascripts %}{% endblock %}
