@@ -70,8 +70,7 @@ class Events
     /**
      * @ORM\Column(type="time", nullable=true)
      */
-    private $time_of;   
-
+    private $start;
     
     public function getId(): ?int
     {
@@ -198,15 +197,16 @@ class Events
         return $this;
     }
 
-    public function getTimeOf(): ?\DateTimeInterface
+    public function getStart(): ?\DateTimeInterface
     {
-        return $this->time_of;
+        return $this->start;
     }
 
-    public function setTimeOf(?\DateTimeInterface $time_of): self
+    public function setStart(?\DateTimeInterface $start): self
     {
-        $this->time_of = $time_of;
+        $this->start = $start;
 
         return $this;
     }
+    
 }

@@ -37,17 +37,17 @@ class EventsController extends AbstractController
 
        $form = $this->createFormBuilder($event)->
        			add('name', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->  			
-       			add('description', TextareaType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
+       			add('description', TextareaType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px', 'rows'=>'5')))->
        			add('img', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('capacity', NumberType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('email', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('phone', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('address', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('url', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
-       			add('type', ChoiceType::class, array('choices'=>array('Music'=>'Music', 'Sport'=>'Sport', 'Movie'=>'Movie', 'Theater'=>'Theater')))->
+       			add('type', ChoiceType::class, array('choices'=>array('Music'=>'Music', 'Kunst'=>'Kunst', 'Sport'=>'Sport', 'Movie'=>'Movie', 'Theater'=>'Theater')))->
             add('day', DateType::class, array('attr' => array('style'=>'margin-bottom:10px')))->
-            add('time_of', TimeType::class, array('attr' => array('style'=>'margin-bottom:10px')))->
-       			add('save', SubmitType::class, array('label'=> 'Create Event', 'attr' => array('class'=> 'btn-primary', 'style'=>'margin-bottom:10px')))            
+            add('start', TimeType::class, array('attr' => array('style'=>'margin-bottom:10px')))->
+       			add('save', SubmitType::class, array('label'=> 'Create Event', 'attr' => array('class'=> 'btn-success', 'style'=>'margin-bottom:10px')))            
        			->getForm();
        			$form->handleRequest($request);
 
@@ -63,7 +63,7 @@ class EventsController extends AbstractController
         			$url = $form['url']->getData();    			
         			$type= $form['type']->getData();
               $day = $form['day']->getData();
-              $time_of = $form['time_of']->getData();
+              $start = $form['start']->getData();
 
         			$event->setName($name);        			
         			$event->setDescription($description);
@@ -75,7 +75,7 @@ class EventsController extends AbstractController
         			$event->setUrl($url);        			
         			$event->setType($type);
               $event->setDay($day);
-              $event->setTimeOf($time_of);
+              $event->setStart($start);
 
         			$em = $this->getDoctrine()->getManager();
         			$em->persist($event);
@@ -95,7 +95,7 @@ class EventsController extends AbstractController
     */
    public function updateAction($id, Request $request)
    {
-       $event = $this->getDoctrine()->getRepository(Events::class)->find($id);
+       $event = $this->getDoctrine()->getRepository('App:Events')->find($id);
 
        	$event->setName($event->getName());        
         $event->setDescription($event->getDescription());
@@ -107,21 +107,21 @@ class EventsController extends AbstractController
         $event->setUrl($event->getUrl());       
         $event->setType($event->getType());
         $event->setDay($event->getDay());
-        $event->setTimeOf($event->getTimeOf());
+        $event->setStart($event->getStart());
 
         $form = $this->createFormBuilder($event)->
        			add('name', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->  			
-       			add('description', TextareaType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
+       			add('description', TextareaType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px', 'rows'=>'5')))->
        			add('img', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('capacity', NumberType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('email', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('phone', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('address', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
        			add('url', TextType::class, array('attr' => array('class'=> 'form-control', 'style'=>'margin-bottom:10px')))->
-       			add('type', ChoiceType::class, array('choices'=>array('Music'=>'Music', 'Sport'=>'Sport', 'Movie'=>'Movie', 'Theater'=>'Theater')))->
+       			add('type', ChoiceType::class, array('choices'=>array('Music'=>'Music', 'Kunst'=>'Kunst', 'Sport'=>'Sport', 'Movie'=>'Movie', 'Theater'=>'Theater')))->
             add('day', DateType::class, array('attr' => array('style'=>'margin-bottom:10px')))->
-            add('time_of', TimeType::class, array('attr' => array('style'=>'margin-bottom:10px')))->
-       			add('save', SubmitType::class, array('label'=> 'Create Event', 'attr' => array('class'=> 'btn-primary', 'style'=>'margin-bottom:10px')))
+            add('start', TimeType::class, array('attr' => array('style'=>'margin-bottom:10px')))->
+       			add('save', SubmitType::class, array('label'=> 'Create Event', 'attr' => array('class'=> 'btn-success', 'style'=>'margin-bottom:10px')))
        			->getForm();
        			$form->handleRequest($request);
 
@@ -137,7 +137,7 @@ class EventsController extends AbstractController
         			$url = $form['url']->getData();    			
         			$type= $form['type']->getData();
               $day = $form['day']->getData();
-              $time_of = $form['time_of']->getData();              
+              $start = $form['start']->getData();              
 
         			$em = $this->getDoctrine()->getManager();
         			$event = $em->getRepository('App:Events')->find($id);
@@ -152,7 +152,7 @@ class EventsController extends AbstractController
         			$event->setUrl($url);        			
         			$event->setType($type);
               $event->setDay($day);
-              $event->setTimeOf($time_of);
+              $event->setStart($start);
 
         			$em->flush();
         			$this->addFlash(
@@ -170,7 +170,7 @@ class EventsController extends AbstractController
    public function detailsAction($id)
    {
       
-       $event = $this->getDoctrine()->getRepository(Events::class)->find($id);
+       $event = $this->getDoctrine()->getRepository('App:Events')->find($id);
 
        return $this->render('events/details.html.twig', array('event'=>$event));
    }
